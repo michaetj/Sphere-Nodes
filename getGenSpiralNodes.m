@@ -25,7 +25,7 @@ X(:,2)=sin(Theta(1,:)).*sin(Phi(1,:));
 X(:,3)=H(1,:);
 
 %Triangulate the nodes
-tri = delaunay(x);
-tri = freeBoundary(TriRep(tri,x));
+tri = delaunay(X);
+tri = freeBoundary(TriRep(tri,X));
 
 end

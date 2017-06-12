@@ -58,12 +58,16 @@ end
 
 %Remove duplicate points
 X = real(X);
-X = 10^(8).*arrayfun(@round,10^(8).*X);
+X = arrayfun(@round,1e8*X);
 X = unique(X,'rows');
+X = X/1e8;
+
+%Project back onto the sphere
+X = bsxfun(@rdivide,X,sqrt(sum(X.^2,2)));
 
 %Triangulate the nodes
-tri = delaunay(x);
-tri = freeBoundary(TriRep(tri,x));
+tri = delaunay(X);
+tri = freeBoundary(TriRep(tri,X));
 
 end
 function [x] = TriEqualAreaProj(m,n)
